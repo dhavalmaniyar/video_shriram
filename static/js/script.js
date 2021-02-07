@@ -37,7 +37,7 @@ drone.on('open', error => {
   room.on('members', members => {
     console.log('MEMBERS', members);
     console.log('>>>>>>>>>>>>>>>>>');
-    if (members.length>=1){
+    if (members.length>=3){
       return alert('The room is full');
     }
     // If we are the second user to connect to the room we will be creating the offer
