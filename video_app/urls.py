@@ -6,4 +6,5 @@ urlpatterns = [
     path('call',views.call,name='call'),
     path('link',views.expirelink,name='link'),
     path('check', views.check, name="check"),
+    path('subscribe', views.subscribe,name='subscribe'),
 ]

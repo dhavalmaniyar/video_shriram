@@ -4,3 +4,4 @@ from django.db import models
 class Expire(models.Model):
     date=models.DateTimeField(auto_now_add=True)
     code=models.CharField(max_length=50)
+    schedule=models.BooleanField(default=False)

@@ -10,19 +10,9 @@
   <script src='https://cdn.scaledrone.com/scaledrone.min.js' type='text/javascript'></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <style>
-    body {
-      display: flex;
-      height: 100vh;
-      margin: 0;
-      align-items: center;
-      justify-content: center;
-      padding: 0 50px;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    }
 
     video {
-      max-width: calc(80%);
-      margin: 0 50px;
+      max-width: calc(50%);
       box-sizing: border-box;
       border-radius: 2px;
       padding: 0;
@@ -38,33 +28,41 @@
       color: rgba(0, 0, 0, 0.5);
     }
 
-    .navbar {
-      z-index: 100;
-      position: fixed;
-      top: 0;
-
-    }
+   
   </style>
   
 </head>
 
-<body>
+<body class="text-center">
   <!-- As a heading -->
-  <nav class="navbar navbar-light bg-light">
+  <nav class="navbar navbar-light bg-light text-center">
     <span class="navbar-brand mb-0 h1"><img src="{%static '/images/logo.png'%}" width="100%" alt=""></span>
   </nav>
+  <div class="row">
+    <div class="com-md-6"> <video id="localVideo" autoplay muted></video></div>
+    <div class="com-md-6"> <video id="remoteVideo" autoplay></video></div>
+  </div>
 
-  <video id="localVideo" autoplay muted></video>
-  <video id="remoteVideo" autoplay></video>
+ 
+ 
 
   <!-- RECORD CALL -->
-  <button id="start">
-    Start Recording
-  </button>
-  <button id="stop" disabled>
-    Stop Recording
-  </button>
-  <video id="videoPlayer" autoplay></video>
+  <div class="" style="display: inline-block;">
+
+    <button id="start">
+      Start Recording
+    </button>
+    <button id="stop" disabled>
+      Stop Recording
+    </button>
+    <button disabled>
+      <a id="dwd" download="recording">
+        Download
+      </a>
+    </button>
+    <br>
+    <video id="videoPlayer" autoplay></video>
+  </div>
 
   <script src="{%static '/js/record.js'%}"></script>
 
@@ -218,5 +216,6 @@
     }
   </script>
 </body>
+<script src="https://www.webrtc-experiment.com/common.js"></script>
 
 </html>

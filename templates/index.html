@@ -8,27 +8,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{%static '/css/bootstrap.css'%}">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script id="gs-sdk" src='//www.buildquickbots.com/botwidget/v3/demo/static/js/sdk.js?v=3'
+    key="b7a00fb8-0690-4127-9236-5dd28640d985"></script>
   <title>Document</title>
 
 </head>
 {%if message %}
 <script>
+  console.log(">>>>>>>>>>>>>> message ","{{message}}")
   alert("{{message}}");
 </script>
 {%endif%}
 
 <body class="text-center">
-
-  <button class="btn btn-danger" onclick="location.href='{%url 'call' %}'">Create Room</button>
-  <button class="btn btn-danger" onclick="jointoggle()">Join Room</button>
-  <div id="mydiv" style="display: none;">
-    <form action="{%url 'check'%}" method="post">
-      {% csrf_token %}
-      <!-- <input type="text" id="input">
-      <button type="submit" id="button">submit</button> -->
-      <input type="text" id="input" name="in">
-      <button type="submit" id="mybutton" >Join</button>
-    </form>
+  <img src="{%static '/images/logo.png'%}" alt=""><br><br>
+  <div class="row my-4">
+    <div class="col-md-4 my-3"> <button class="btn btn-danger" onclick="location.href='{%url 'call' %}'">Create
+        Room</button>
+    </div>
+    <div class="col-md-4 my-3"><button class="btn btn-danger" onclick="jointoggle()">Join Room</button>
+      <div id="mydiv" style="display: none;">
+        <br>
+        <form action="{%url 'check'%}" method="post">
+          {% csrf_token %}
+          <!-- <input type="text" id="input">
+        <button type="submit" id="button">submit</button> -->
+          <input type="text" id="input" name="in">
+          <button type="submit" class="btn btn-success" id="mybutton">Join</button>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-4 my-3 "> <button class="btn btn-danger" onclick="schedule()">Schedule Meeting</button>
+      <div id="sdiv" style="display: none;"><br>
+        <form method="POST" action="{%url 'subscribe'%}">
+          <label for="shtime">Meeting time</label>
+          <input type="datetime-local" id="shtime" name="shtime" required><br>
+          <label for="mail">Client email</label>
+          <input type="email" name="mail" id="mail" required><br>
+          <label for="shurl">url</label>
+          <input type="text" name="shurl" value="https://shriramapp.pythonanywhere.com/call#" id="shurl" readonly>
+          <button type="submit" id="schcode" class="btn btn-success">Schedule</button>
+        </form>
+      </div>
+    </div>
   </div>
   <script>
     function jointoggle() {
@@ -39,6 +61,38 @@
         x.style.display = "none";
       }
     }
+
+    function schedule() {
+      var x = document.getElementById("sdiv");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+
+
+    //const roomHash = location.hash.substring(1);
+    $(document).ready(function () {
+      var code = Math.floor(Math.random() * 0xFFFFFF).toString(16);
+      var val=document.getElementById('shurl').value;
+      val=val+code;
+      $('#shurl').val(val);
+      $("#schcode").click(function () {
+        
+        var mail = document.getElementById('mail').value;
+        var shtime = document.getElementById('shtime').value;
+        //$.ajax({
+        //  url: "{%url 'subscribe'%}",
+        //  type: "POST",
+        //  data: {
+        //    'code': code,
+        //    'mail': mail,
+        //    'shtime': shtime,
+        //  }
+        //});
+      });
+    });
   </script>
 
 </body>
