@@ -59,7 +59,7 @@ def subscribe(request):
         # recepient = str(sub['Email'].value())
         recepient=str(client)
         send_mail(subject, 
-            message, "bhindadipanshu@gmail.com", [recepient], fail_silently = False)
-        send_mail(subject,message,'bhindadipanshu@gmail.com',['bhindadipanshu@gmail.com'],fail_silently=False)
+            message, "dhavalmaniyar123@gmail.com", [recepient], fail_silently = False)
+        send_mail(subject,message,'dhavalmaniyar123@gmail.com',['dhavalmaniyar123@gmail.com'],fail_silently=False)
         return render(request,'index.html',{'message':"meeting is scheduled"})
 
