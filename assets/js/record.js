@@ -1,6 +1,8 @@
 const start = document.getElementById("start");
 const stop = document.getElementById("stop");
+const dwd = document.getElementById("dwd");
 const video = document.getElementById("videoPlayer");
+
 let recorder, stream;
 
 const mergeAudioStreams = (desktopStream, voiceStream) => {
@@ -16,7 +18,7 @@ const mergeAudioStreams = (desktopStream, voiceStream) => {
     source1.connect(desktopGain).connect(destination);
     hasDesktop = true;
   }
-  
+
   if (voiceStream && voiceStream.getAudioTracks().length > 0) {
     const source2 = context.createMediaStreamSource(voiceStream);
     const voiceGain = context.createGain();
@@ -24,8 +26,8 @@ const mergeAudioStreams = (desktopStream, voiceStream) => {
     source2.connect(voiceGain).connect(destination);
     hasVoice = true;
   }
-    
-  return (hasDesktop || hasVoice) ? destination.stream.getAudioTracks() : [];
+
+  return hasDesktop || hasVoice ? destination.stream.getAudioTracks() : [];
 };
 
 async function startRecording() {
@@ -33,46 +35,53 @@ async function startRecording() {
   const mic = true;
   desktopStream = await navigator.mediaDevices.getDisplayMedia({
     video: true,
-    audio: audio
+    audio: audio,
   });
 
   if (mic === true) {
     voiceStream = await navigator.mediaDevices.getUserMedia({
       video: false,
-      audio: mic
+      audio: mic,
     });
   }
 
   const tracks = [
     ...desktopStream.getVideoTracks(),
-    ...mergeAudioStreams(desktopStream, voiceStream)
+    ...mergeAudioStreams(desktopStream, voiceStream),
   ];
 
-  console.log('Tracks to add to stream', tracks);
+  console.log("Tracks to add to stream", tracks);
   stream = new MediaStream(tracks);
 
   // video.srcObject = stream;
   video.muted = true;
 
- 
-  recorder = new MediaRecorder(stream, {mimeType: 'video/webm; codecs=vp8,opus'});
+  recorder = new MediaRecorder(stream, {
+    mimeType: "video/webm; codecs=vp8,opus",
+  });
 
   const chunks = [];
-  recorder.ondataavailable = e => chunks.push(e.data);
+  recorder.ondataavailable = (e) => chunks.push(e.data);
   recorder.start();
 
-  recorder.onstop = e => {
+  recorder.onstop = (e) => {
     const completeBlob = new Blob(chunks, {
-      type: chunks[0].type
+      type: chunks[0].type,
     });
     console.log("3>>>>>>>>>", video.src);
     video.src = URL.createObjectURL(completeBlob);
+    dwdUrl(URL.createObjectURL(completeBlob));
     console.log("1>>>>>>>>> ", video.src);
   };
 }
 
 async function stopRecording() {
   recorder.stop();
+}
+
+async function dwdUrl(a) {
+  dwd.href = a;
+  dwd.removeAttribute("disabled");
 }
 
 start.addEventListener("click", () => {

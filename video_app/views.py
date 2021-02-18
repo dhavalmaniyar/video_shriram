@@ -13,6 +13,14 @@ def index(request):
 def call(request):
     return render(request,'call.html')
 
+def feedback(request):
+    # name=request.POST.get('name')
+    # email=request.POST.get('email')
+    # user_friendly=request.POST.get('user_friendly')
+    # audio=request.POST.get('qty')
+    # data=Feedback(name=name,email=email,is_the_app_is_user_friendly=user_friendly,What_was_the_quality_of_the_sound_during_the_video_conference_transmission=audio)
+    # data.save()
+    return render(request,'feedback.html')
 @csrf_exempt 
 def expirelink(request):
     print("asdf >>>>>")
@@ -26,7 +34,7 @@ def check(request):
     chk=request.POST['in']
     chkdata=Expire.objects.filter(code=chk)
     if chkdata:
-
+      
     # for c in chkdata:         
     #     print(c.code)
     #     print(chk)
@@ -51,6 +59,7 @@ def subscribe(request):
         # recepient = str(sub['Email'].value())
         recepient=str(client)
         send_mail(subject, 
-            message, "dhavalmaniyar123@gmail.com", [recepient], fail_silently = False)
-        send_mail(subject,message,'dhavalmaniyar123@gmail.com',['dhavalmaniyar123@gmail.com'],fail_silently=False)
+            message, "bhindadipanshu@gmail.com", [recepient], fail_silently = False)
+        send_mail(subject,message,'bhindadipanshu@gmail.com',['bhindadipanshu@gmail.com'],fail_silently=False)
         return render(request,'index.html',{'message':"meeting is scheduled"})
+
