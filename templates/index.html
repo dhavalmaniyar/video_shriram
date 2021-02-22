@@ -11,7 +11,11 @@
   <script id="gs-sdk" src='//www.buildquickbots.com/botwidget/v3/demo/static/js/sdk.js?v=3'
     key="b7a00fb8-0690-4127-9236-5dd28640d985"></script>
   <title>Document</title>
-
+  <style>
+    #shcode{
+      visibility: hidden;
+    }
+  </style>
 </head>
 {%if message %}
 <script>
@@ -46,7 +50,8 @@
           <label for="mail">Client email</label>
           <input type="email" name="mail" id="mail" required><br>
           <label for="shurl">url</label>
-          <input type="text" name="shurl" value="https://shriramapp.pythonanywhere.com/call#" id="shurl" readonly>
+          <input type="text" name="shurl" value="https://shriramapp.pythonanywhere.com/call#" id="shurl" readonly><br>
+          <input type="text" name="shcode" value="#" id="shcode" readonly><br>
           <button type="submit" id="schcode" class="btn btn-success">Schedule</button>
         </form>
       </div>
@@ -78,6 +83,7 @@
       var val = document.getElementById('shurl').value;
       val = val + code;
       $('#shurl').val(val);
+      $('#shcode').val(code);
       $("#schcode").click(function () {
 
         var mail = document.getElementById('mail').value;

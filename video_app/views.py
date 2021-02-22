@@ -49,7 +49,7 @@ def subscribe(request):
     client= request.POST.get('mail')
     
     # sub = forms.Subscribe()
-    codes=123
+    codes=request.POST.get('shcode')
     
     # codesTwo=request.POST.data['code']
     
