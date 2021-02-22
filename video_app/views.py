@@ -23,9 +23,10 @@ def feedback(request):
     return render(request,'feedback.html')
 @csrf_exempt 
 def expirelink(request):
-    print("asdf >>>>>")
     link= request.POST['counter']
-    data=Expire(code=link)
+    time=datetime.datetime.now()
+    data=Expire(date=time,code=link)
+    print("asdf >>>>>",time)
     data.save()
     return render(request,'index.html')
 

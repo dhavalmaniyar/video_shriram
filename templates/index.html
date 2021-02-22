@@ -15,7 +15,7 @@
 </head>
 {%if message %}
 <script>
-  console.log(">>>>>>>>>>>>>> message ","{{message}}")
+  console.log(">>>>>>>>>>>>>> message ", "{{message}}")
   alert("{{message}}");
 </script>
 {%endif%}
@@ -75,11 +75,11 @@
     //const roomHash = location.hash.substring(1);
     $(document).ready(function () {
       var code = Math.floor(Math.random() * 0xFFFFFF).toString(16);
-      var val=document.getElementById('shurl').value;
-      val=val+code;
+      var val = document.getElementById('shurl').value;
+      val = val + code;
       $('#shurl').val(val);
       $("#schcode").click(function () {
-        
+
         var mail = document.getElementById('mail').value;
         var shtime = document.getElementById('shtime').value;
         //$.ajax({
