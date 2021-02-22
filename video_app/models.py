@@ -11,7 +11,7 @@ class EventManager(models.Manager):
         )
 
 class Expire(models.Model):
-    date=models.DateTimeField(auto_now_add=True)
+    date=models.DateTimeField(default=datetime.datetime.now())
     code=models.CharField(max_length=50)
     schedule=models.BooleanField(default=False)
     objects = EventManager()

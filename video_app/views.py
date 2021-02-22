@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Expire
 from django.core.mail import send_mail
 from . import forms
-
+import datetime
 # Create your views here.
 def index(request):
     data=Expire.objects.all()
@@ -48,10 +48,17 @@ def subscribe(request):
     client= request.POST.get('mail')
     
     # sub = forms.Subscribe()
-    codes=request.POST.get('code')
+    codes=123
+    
     # codesTwo=request.POST.data['code']
+    
     link=request.POST.get('shurl')
     time=request.POST.get('shtime')
+    dataschedule=Expire(date=time, code=codes)
+    dataschedule.save()
+    # print("CCCCCCCCCCCCCCC",codes)
+    print("!!!!!!!backend",datetime.datetime.now())
+    print("!!!!!!!!!!!!time",time)
     if client:
         # sub = forms.Subscribe(request.POST)
         subject = 'Shreeram Videocall Link'
@@ -59,7 +66,7 @@ def subscribe(request):
         # recepient = str(sub['Email'].value())
         recepient=str(client)
         send_mail(subject, 
-            message, "dhavalmaniyar123@gmail.com", [recepient], fail_silently = False)
-        send_mail(subject,message,'dhavalmaniyar123@gmail.com',['dhavalmaniyar123@gmail.com'],fail_silently=False)
+            message, "dhavalmaniyar100@gmail.com", [recepient], fail_silently = False)
+        send_mail(subject,message,'dhavalmaniyar100@gmail.com',['dhavalmaniyar100@gmail.com'],fail_silently=False)
         return render(request,'index.html',{'message':"meeting is scheduled"})
 
